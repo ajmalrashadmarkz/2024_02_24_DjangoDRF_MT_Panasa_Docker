@@ -1,0 +1,127 @@
+App Modules
+    1.accounts
+    2.review
+
+ACCOUNTS
+    1.Super User have only access Dashboard
+    2.SimpleJWT Token Authentication
+
+ACCOUNT - API
+    1.User Registration -End Point[POST]
+        http://127.0.0.1:8000/users/ 
+
+        Dummy Data
+        {
+            "email": "admin1@admin.com",
+            "first_name": "Admin",
+            "last_name": "One",
+            "password": "admin@123"
+        }
+    2. User Login -End Point [POST]
+        http://127.0.0.1:8000/users/login/
+
+        Dummy Data
+        {
+            "email": "admin1@admin.com",
+            "password": "admin@123"
+        }
+    3. User Logout -End Point [POST]
+        http://127.0.0.1:8000/users/logout/
+
+REVIEW
+    1. Author Creation
+    2. Book Creation
+    3. Review Writing for Author and Book
+    http://127.0.0.1:8000/api/authors/
+
+REVIEW - API
+    1. Author Creation [GET, POST]
+        http://127.0.0.1:8000/api/authors/
+        GET - List All Enrolled authors
+        POST -  Author Creation
+
+        Dummy Data
+        {
+            "name": "Author 1",
+            "bio": "He is First Enrolled Author",
+            "published_books": 0,
+            "total_rating": "0.00",
+            "author_review_count": 0
+        }
+
+        published_books - For each book entry, increment the published_books count for the author whose ID is provided
+        total_rating - Average rating of all users
+        author_review_count - how  many review get for an author
+
+    2. Book Creation [POST]
+        http://127.0.0.1:8000/api/books_create/
+
+        Dummy Data
+        {
+            "title":  "Book 1" ,
+            "author_id" :  1    , 
+            "description":    "It  is the first Book Entry"    , 
+            "total_rating":   0    , 
+            "book_review_count": 0
+        }
+
+        total_rating - Average rating of all users
+        author_review_count - how  many review get for a book
+
+    3. Book List ,Detail, Update  View [GET,PUT,PATCH,DELETE]
+        http://127.0.0.1:8000/api/books/<int:pk>/
+        GET - List Out All  books
+        PUT,PATCH - Full and Partial Modification
+        DELETE
+
+        Dummy Data
+        {
+            "title":  "Book 1" ,
+            "description":    "It  is the first Book Entry- updated" 
+            
+        }
+
+        Success - Response
+        {
+             "title": "Book 1",
+            "author": {
+                "name": "Author !",
+                "bio": "He is First Enrolled Author",
+                "published_books": 1,
+                "total_rating": "0.00",
+                "author_review_count": 0
+                },
+            "description": "It  is the first Book Entry- updated",
+            "total_rating": "0.00",
+            "book_review_count": 0
+        }
+
+    4. Create Review [POST]
+        http://127.0.0.1:8000/api/review_create/
+
+        Dummy Data
+        {
+            "review_content": "This is a test review content of book 1.",
+            "content": "This is a test content.",
+            "rating": 5,
+            "book_id": 1,
+            "author_id": 1
+        }
+
+        user - current session user as review writer
+        rating - Rating Must be between 0 t0 5 -this rating added to author and book table
+        book_id - the review goes to which author
+        author_id - the review goes to which book
+
+    5. List Of of All review of a Particular author[POST]
+        http://127.0.0.1:9000/api/reviews/author/
+
+        Dummy Data
+        {
+            "author_id": 1
+        }
+
+        author_id - Find out all reviews about Author 1
+
+
+
